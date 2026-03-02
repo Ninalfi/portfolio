@@ -6,7 +6,7 @@ import GsapReveal from "../component/GsapReveal";
 import SectionTitle from "../component/SectionTitle";
 import ProjectCard from "../component/ProjectCard";
 import Footer from "../component/Footer";
-import profilePhoto from "../assets/profile.png";
+import profilePhoto from "../assets/profile.jpeg"
 
 export default function Home() {
   return (

@@ -1,18 +1,18 @@
 export const profile = {
-  name: "Your Name",
+  name: "Alfi Sharin Ninad",
   designation: "Full Stack Developer",
   tagline:
     "I build modern, clean, high-performance web apps with great UX & animations.",
   location: "Bangladesh",
-  resumeHref: "/resume.pdf", // or "#"
-  email: "youremail@example.com",
-  phone: "+8801XXXXXXXXX",
-  whatsapp: "+8801XXXXXXXXX", // optional
+  resumeHref: "/resume.pdf", 
+  email: "alfininad192@gmail.com",
+  phone: "+8801613787093",
+  whatsapp: "+8801613787093", 
   socials: [
-    { label: "GitHub", href: "https://github.com/yourusername" },
-    { label: "LinkedIn", href: "https://linkedin.com/in/yourusername" },
+    { label: "GitHub", href: "https://github.com/Ninalfi" },
+    { label: "LinkedIn", href: "https://www.linkedin.com/in/alfi-sharin-ninad-389230333/?skipRedirect=true" },
     { label: "Twitter", href: "https://twitter.com/yourusername" },
-    { label: "Facebook", href: "https://facebook.com/yourusername" },
+    { label: "Facebook", href: "https://www.facebook.com/profile.php?id=61588291481817" },
   ],
 };
 
@@ -58,21 +58,20 @@ export const skills = [
 export const education = [
   {
     title: "BSc in Computer Science & Engineering",
-    institute: "Your University",
+    institute: "Jagannth University",
     year: "2022 - Present",
     details: [
-      "Relevant: DSA, DBMS, OOP, Web Development",
+      "Relevant: DSA, DBMS, OOP, Web Development, Python, JS.",
       "Built multiple full-stack projects & UI-focused apps",
     ],
   },
 ];
 
 export const experience = [
-  // If you have none, keep it empty: []
   {
     role: "Frontend Developer (Intern)",
-    company: "Company Name",
-    year: "2025",
+    company: "Programming Hero",
+    year: "2026",
     points: [
       "Built responsive pages and reusable UI components.",
       "Integrated REST APIs and handled loading/error states.",
@@ -90,8 +89,8 @@ export const projects = [
     stack: ["React", "Tailwind", "Node", "Express", "MongoDB"],
     description:
       "A modern book marketplace/delivery system with dashboard, blog, and book listing.",
-    live: "https://your-live-link.com",
-    github: "https://github.com/yourusername/bookcourier-client",
+    live: "https://book-courier-9e429.web.app ",
+    github: "https://github.com/Ninalfi/BookCourier-Client",
     challenges: [
       "Role-based UI access for Admin/Librarian/User.",
       "Building reusable cards and consistent layouts.",
