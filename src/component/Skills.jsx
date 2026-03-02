@@ -1,5 +1,6 @@
 import { useMemo, useState } from "react";
 import { motion } from "framer-motion";
+import MagneticButton from "./MagneticButton";
 
 export default function Skills({ groups }) {
   const categories = useMemo(() => groups.map((g) => g.category), [groups]);
@@ -15,7 +16,7 @@ export default function Skills({ groups }) {
         {categories.map((c) => {
           const isActive = c === active;
           return (
-            <button
+            <MagneticButton
               key={c}
               onClick={() => setActive(c)}
               className={[
@@ -26,7 +27,7 @@ export default function Skills({ groups }) {
               ].join(" ")}
             >
               {c}
-            </button>
+            </MagneticButton>
           );
         })}
       </div>
@@ -39,6 +40,7 @@ export default function Skills({ groups }) {
             className="rounded-2xl border p-4 bg-gray-50
                        dark:bg-white/5 dark:border-white/10"
           >
+           
             <div className="flex items-center justify-between mb-2">
               <p className="font-semibold text-gray-900 dark:text-white">
                 {s.name}
@@ -47,6 +49,7 @@ export default function Skills({ groups }) {
                 {s.level}%
               </p>
             </div>
+            
 
             {/* Animated bar */}
             <div className="h-2 rounded-full bg-gray-200 overflow-hidden dark:bg-white/10">

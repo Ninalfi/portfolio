@@ -76,7 +76,7 @@ export default function ProjectDetails() {
               >
                 Live Project Link
               </a>
-
+                
               <a
                 href={project.github}
                 target="_blank"

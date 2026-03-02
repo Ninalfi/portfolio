@@ -1,6 +1,5 @@
 import { useEffect, useRef } from "react";
 import { education, experience, profile, projects, skills } from "../data/portfolioData";
-import { motion } from "framer-motion";
 import Skills from "../component/Skills";
 import Navbar from "../component/Navbar";
 import GsapReveal from "../component/GsapReveal";
@@ -9,9 +8,11 @@ import ProjectCard from "../component/ProjectCard";
 import Footer from "../component/Footer";
 import profilePhoto from "../assets/image.png";
 import About from "../component/About";
+import MagneticButton from "../component/MagneticButton";
 
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import BackgroundFader from "../component/BackgroundFader";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -22,7 +23,7 @@ export default function Home() {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      // 1) HERO: stagger reveal (runs on load)
+      // HERO: stagger reveal (runs on load)
       gsap.fromTo(
         ".hero-item",
         { opacity: 0, y: 18 },
@@ -35,7 +36,7 @@ export default function Home() {
         }
       );
 
-      // 2) HERO IMAGE: soft parallax while scrolling
+      // HERO IMAGE: soft parallax while scrolling
       if (heroImgRef.current && heroRef.current) {
         gsap.to(heroImgRef.current, {
           y: 40,
@@ -49,7 +50,7 @@ export default function Home() {
         });
       }
 
-      // 3) PROJECTS: stagger cards on scroll
+      // PROJECTS: stagger cards on scroll
       if (projectsGridRef.current) {
         gsap.fromTo(
           ".project-card",
@@ -74,12 +75,17 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-[#F6F3EE] text-gray-900 dark:bg-[#0B0B0B] dark:text-white">
+
+         <BackgroundFader/>
       <Navbar />
+     
 
       {/* HERO */}
       <section
         ref={heroRef}
         id="home"
+          data-bg="#F6F3EE"
+  data-bg-dark="#0B0B0B"
         className="mx-auto max-w-6xl px-4 py-12 md:py-16"
       >
         <div className="grid md:grid-cols-2 gap-10 items-center">
@@ -100,28 +106,25 @@ export default function Home() {
               {profile.tagline}
             </p>
 
-            {/* Resume + socials */}
+    
             <div className="hero-item mt-6 flex flex-wrap gap-3">
-              <a
-                href={profile.resumeHref || "#"}
-                download
+              <MagneticButton
                 className="rounded-xl bg-black text-white px-5 py-2.5 text-sm hover:opacity-90
                            dark:bg-white dark:text-black"
+                onClick={() => window.open(profile.resumeHref || "#", "_blank")}
               >
                 View / Download Resume
-              </a>
+              </MagneticButton>
 
               {profile.socials.map((s) => (
-                <a
+                <MagneticButton
                   key={s.label}
-                  href={s.href}
-                  target="_blank"
-                  rel="noreferrer"
                   className="rounded-xl border bg-white px-4 py-2.5 text-sm hover:bg-gray-50
                              dark:bg-[#111] dark:text-white dark:border-white/10 dark:hover:bg-[#171717]"
+                  onClick={() => window.open(s.href, "_blank")}
                 >
                   {s.label}
-                </a>
+                </MagneticButton>
               ))}
             </div>
           </div>
@@ -142,15 +145,21 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ABOUT */}
-      <section id="about" className="mx-auto max-w-6xl px-4 py-12">
+   
+      <section id="about"
+        data-bg="#F2F1FF"
+  data-bg-dark="#0C0F16"
+   className="mx-auto max-w-6xl px-4 py-12">
         <GsapReveal>
           <About />
         </GsapReveal>
       </section>
 
-      {/* SKILLS */}
-      <section id="skills" className="mx-auto max-w-6xl px-4 py-12">
+      <section id="skills" 
+        data-bg="#EEF7F2"
+  data-bg-dark="#0C1110"
+      className="mx-auto max-w-6xl px-4 py-12">
+    
         <GsapReveal>
           <SectionTitle
             title="Skills"
@@ -161,7 +170,10 @@ export default function Home() {
       </section>
 
       {/* EDUCATION */}
-      <section id="education" className="mx-auto max-w-6xl px-4 py-12">
+      <section id="education"
+        data-bg="#FFF4EC"
+  data-bg-dark="#120C0A"
+   className="mx-auto max-w-6xl px-4 py-12">
         <GsapReveal>
           <SectionTitle title="Educational Qualification" />
           <div className="grid gap-6">
@@ -196,7 +208,10 @@ export default function Home() {
       </section>
 
       {/* EXPERIENCE */}
-      <section id="experience" className="mx-auto max-w-6xl px-4 py-12">
+      <section id="experience"
+        data-bg="#F2F3F5"
+  data-bg-dark="#0E0E10"
+   className="mx-auto max-w-6xl px-4 py-12">
         <GsapReveal>
           <SectionTitle
             title="Experience"
@@ -244,7 +259,9 @@ export default function Home() {
       </section>
 
       {/* PROJECTS */}
-      <section id="projects" className="mx-auto max-w-6xl px-4 py-12">
+      <section id="projects"
+        data-bg-dark="#0A0F14"
+         className="mx-auto max-w-6xl px-4 py-12">
         <GsapReveal>
           <SectionTitle
             title="Projects"
@@ -264,7 +281,10 @@ export default function Home() {
       </section>
 
       {/* CONTACT */}
-      <section id="contact" className="mx-auto max-w-6xl px-4 py-12">
+      <section id="contact" 
+        data-bg="#F7F0FF"
+  data-bg-dark="#110A14"
+  className="mx-auto max-w-6xl px-4 py-12">
         <GsapReveal>
           <SectionTitle
             title="Contact Information"

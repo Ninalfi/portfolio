@@ -119,15 +119,15 @@ export const projects = [
     improvements: ["Add hourly/weekly charts.", "Save favorite cities."],
   },
   {
-    slug: "shoplite",
-    name: "ShopLite – E-commerce Frontend",
+    slug: "skillio",
+    name: "Skillio – Skill Development Platform and online job marketplace",
     image:
-      "https://images.unsplash.com/photo-1512436991641-6745cdb1723f?auto=format&fit=crop&w=1400&q=80",
+      "https://i.ibb.co/FLZDYWbC/Chat-GPT-Image-Mar-2-2026-03-50-15-PM.png",
     stack: ["React", "React Router", "Tailwind"],
     description:
-      "E-commerce UI with product listing, cart flow, and responsive design.",
-    live: "https://your-live-link.com/shoplite",
-    github: "https://github.com/yourusername/shoplite-client",
+      "A skill development platform with course listings, user dashboard, and job marketplace.",
+    live: "https://freelance-marketplace-87993.web.app/",
+    github: "https://github.com/Ninalfi/freelancer-marketplace-client",
     challenges: [
       "Managing cart state across routes.",
       "Designing a scalable UI system for products.",
