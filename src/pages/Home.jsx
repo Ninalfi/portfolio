@@ -1,3 +1,4 @@
+import { useEffect, useRef } from "react";
 import { education, experience, profile, projects, skills } from "../data/portfolioData";
 import { motion } from "framer-motion";
 import Skills from "../component/Skills";
@@ -6,56 +7,101 @@ import GsapReveal from "../component/GsapReveal";
 import SectionTitle from "../component/SectionTitle";
 import ProjectCard from "../component/ProjectCard";
 import Footer from "../component/Footer";
-import profilePhoto from "../assets/profile.jpeg";
+import profilePhoto from "../assets/image.png";
 import About from "../component/About";
 
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
+
 export default function Home() {
+  const heroRef = useRef(null);
+  const heroImgRef = useRef(null);
+  const projectsGridRef = useRef(null);
+
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      // 1) HERO: stagger reveal (runs on load)
+      gsap.fromTo(
+        ".hero-item",
+        { opacity: 0, y: 18 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.9,
+          ease: "power3.out",
+          stagger: 0.12,
+        }
+      );
+
+      // 2) HERO IMAGE: soft parallax while scrolling
+      if (heroImgRef.current && heroRef.current) {
+        gsap.to(heroImgRef.current, {
+          y: 40,
+          ease: "none",
+          scrollTrigger: {
+            trigger: heroRef.current,
+            start: "top top",
+            end: "bottom top",
+            scrub: true,
+          },
+        });
+      }
+
+      // 3) PROJECTS: stagger cards on scroll
+      if (projectsGridRef.current) {
+        gsap.fromTo(
+          ".project-card",
+          { opacity: 0, y: 18 },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.8,
+            ease: "power3.out",
+            stagger: 0.12,
+            scrollTrigger: {
+              trigger: projectsGridRef.current,
+              start: "top 85%",
+            },
+          }
+        );
+      }
+    }, heroRef);
+
+    return () => ctx.revert();
+  }, []);
+
   return (
     <div className="min-h-screen bg-[#F6F3EE] text-gray-900 dark:bg-[#0B0B0B] dark:text-white">
       <Navbar />
 
       {/* HERO */}
-      <section id="home" className="mx-auto max-w-6xl px-4 py-12 md:py-16">
+      <section
+        ref={heroRef}
+        id="home"
+        className="mx-auto max-w-6xl px-4 py-12 md:py-16"
+      >
         <div className="grid md:grid-cols-2 gap-10 items-center">
           <div>
-            <motion.p
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-              className="text-sm text-gray-600 dark:text-gray-300"
-            >
+            <p className="hero-item text-sm text-gray-600 dark:text-gray-300">
               {profile.location}
-            </motion.p>
+            </p>
 
-            <motion.h1
-              initial={{ opacity: 0, y: 18 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.75 }}
-              className="text-3xl md:text-5xl font-bold mt-2"
-            >
+            <h1 className="hero-item text-3xl md:text-5xl font-bold mt-2">
               {profile.name}
-            </motion.h1>
+            </h1>
 
-            <motion.p
-              initial={{ opacity: 0, y: 14 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.1, duration: 0.7 }}
-              className="mt-3 text-lg md:text-xl text-gray-900 dark:text-white"
-            >
+            <p className="hero-item mt-3 text-lg md:text-xl text-gray-900 dark:text-white">
               {profile.designation}
-            </motion.p>
+            </p>
 
-            <motion.p
-              initial={{ opacity: 0, y: 14 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2, duration: 0.7 }}
-              className="mt-4 text-gray-600 dark:text-gray-300"
-            >
+            <p className="hero-item mt-4 text-gray-600 dark:text-gray-300">
               {profile.tagline}
-            </motion.p>
+            </p>
 
             {/* Resume + socials */}
-            <div className="mt-6 flex flex-wrap gap-3">
+            <div className="hero-item mt-6 flex flex-wrap gap-3">
               <a
                 href={profile.resumeHref || "#"}
                 download
@@ -81,10 +127,8 @@ export default function Home() {
           </div>
 
           <div className="flex md:justify-end">
-            <motion.div
-              initial={{ opacity: 0, scale: 0.96 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.7 }}
+            <div
+              ref={heroImgRef}
               className="rounded-3xl border bg-white p-3 shadow-sm
                          dark:bg-[#111] dark:border-white/10"
             >
@@ -93,7 +137,7 @@ export default function Home() {
                 alt="Professional portrait"
                 className="w-64 h-64 md:w-80 md:h-80 object-cover rounded-2xl"
               />
-            </motion.div>
+            </div>
           </div>
         </div>
       </section>
@@ -206,9 +250,14 @@ export default function Home() {
             title="Projects"
             subtitle="At least 3 projects with detail pages."
           />
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div
+            ref={projectsGridRef}
+            className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6"
+          >
             {projects.map((p) => (
-              <ProjectCard key={p.slug} project={p} />
+              <div key={p.slug} className="project-card">
+                <ProjectCard project={p} />
+              </div>
             ))}
           </div>
         </GsapReveal>
