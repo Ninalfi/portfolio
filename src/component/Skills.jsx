@@ -1,39 +1,78 @@
+import { useMemo, useState } from "react";
+import { motion } from "framer-motion";
+
 export default function Skills({ groups }) {
+  const categories = useMemo(() => groups.map((g) => g.category), [groups]);
+  const [active, setActive] = useState(categories[0] || "");
+
+  const current = groups.find((g) => g.category === active) || groups[0];
+
   return (
-    <div className="grid md:grid-cols-3 gap-6">
-      {groups.map((g) => (
-        <div
-          key={g.category}
-          className="rounded-2xl border bg-white p-5
-                     dark:bg-[#111] dark:border-white/10"
-        >
-          <h3 className="font-semibold mb-4 text-gray-900 dark:text-white">
-            {g.category}
-          </h3>
+    <div className="rounded-2xl border bg-white p-5 md:p-6
+                    dark:bg-[#111] dark:border-white/10">
+      {/* Tabs */}
+      <div className="flex flex-wrap gap-2 mb-6">
+        {categories.map((c) => {
+          const isActive = c === active;
+          return (
+            <button
+              key={c}
+              onClick={() => setActive(c)}
+              className={[
+                "px-4 py-2 rounded-xl text-sm border transition",
+                isActive
+                  ? "bg-black text-white border-black dark:bg-white dark:text-black dark:border-white"
+                  : "bg-white text-gray-700 border-gray-200 hover:bg-gray-50 dark:bg-[#111] dark:text-gray-200 dark:border-white/10 dark:hover:bg-white/5",
+              ].join(" ")}
+            >
+              {c}
+            </button>
+          );
+        })}
+      </div>
 
-          <div className="space-y-4">
-            {g.items.map((s) => (
-              <div key={s.name}>
-                <div className="flex justify-between text-sm mb-1">
-                  <span className="text-gray-800 dark:text-gray-200">
-                    {s.name}
-                  </span>
-                  <span className="text-gray-500 dark:text-gray-400">
-                    {s.level}%
-                  </span>
-                </div>
+      {/* Skills grid */}
+      <div className="grid md:grid-cols-2 gap-5">
+        {current?.items?.map((s) => (
+          <div
+            key={s.name}
+            className="rounded-2xl border p-4 bg-gray-50
+                       dark:bg-white/5 dark:border-white/10"
+          >
+            <div className="flex items-center justify-between mb-2">
+              <p className="font-semibold text-gray-900 dark:text-white">
+                {s.name}
+              </p>
+              <p className="text-sm text-gray-600 dark:text-gray-300">
+                {s.level}%
+              </p>
+            </div>
 
-                <div className="h-2 rounded-full bg-gray-100 overflow-hidden dark:bg-white/10">
-                  <div
-                    className="h-full bg-black rounded-full dark:bg-white"
-                    style={{ width: `${s.level}%` }}
-                  />
-                </div>
-              </div>
-            ))}
+            {/* Animated bar */}
+            <div className="h-2 rounded-full bg-gray-200 overflow-hidden dark:bg-white/10">
+              <motion.div
+                initial={{ width: 0 }}
+                whileInView={{ width: `${s.level}%` }}
+                viewport={{ once: true, amount: 0.4 }}
+                transition={{ duration: 0.8, ease: "easeOut" }}
+                className="h-full rounded-full bg-black dark:bg-white"
+              />
+            </div>
+
+            {/* Mini tags (optional feel) */}
+            <div className="mt-3 flex gap-2 flex-wrap">
+              <span className="text-xs px-2 py-1 rounded-full border bg-white text-gray-600
+                               dark:bg-[#111] dark:text-gray-300 dark:border-white/10">
+                Level: {s.level}
+              </span>
+              <span className="text-xs px-2 py-1 rounded-full border bg-white text-gray-600
+                               dark:bg-[#111] dark:text-gray-300 dark:border-white/10">
+                Category: {active}
+              </span>
+            </div>
           </div>
-        </div>
-      ))}
+        ))}
+      </div>
     </div>
   );
 }

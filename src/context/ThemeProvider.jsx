@@ -4,11 +4,9 @@ const ThemeContext = createContext(null);
 
 export function ThemeProvider({ children }) {
   const [theme, setTheme] = useState(() => {
-    // saved theme
     const saved = localStorage.getItem("theme");
     if (saved === "light" || saved === "dark") return saved;
 
-    // system theme fallback
     const prefersDark =
       window.matchMedia &&
       window.matchMedia("(prefers-color-scheme: dark)").matches;
@@ -19,8 +17,8 @@ export function ThemeProvider({ children }) {
   useEffect(() => {
     const root = document.documentElement;
 
-    if (theme === "dark") root.classList.add("dark");
-    else root.classList.remove("dark");
+    root.classList.remove("light", "dark");
+    root.classList.add(theme);
 
     localStorage.setItem("theme", theme);
   }, [theme]);
