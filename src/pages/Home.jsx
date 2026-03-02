@@ -1,4 +1,4 @@
-import { about, education, experience, profile, projects, skills } from "../data/portfolioData";
+import { education, experience, profile, projects, skills } from "../data/portfolioData";
 import { motion } from "framer-motion";
 import Skills from "../component/Skills";
 import Navbar from "../component/Navbar";
@@ -6,11 +6,12 @@ import GsapReveal from "../component/GsapReveal";
 import SectionTitle from "../component/SectionTitle";
 import ProjectCard from "../component/ProjectCard";
 import Footer from "../component/Footer";
-import profilePhoto from "../assets/profile.jpeg"
+import profilePhoto from "../assets/profile.jpeg";
+import About from "../component/About";
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-[#F6F3EE] text-gray-900">
+    <div className="min-h-screen bg-[#F6F3EE] text-gray-900 dark:bg-[#0B0B0B] dark:text-white">
       <Navbar />
 
       {/* HERO */}
@@ -21,7 +22,7 @@ export default function Home() {
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
-              className="text-sm text-gray-600"
+              className="text-sm text-gray-600 dark:text-gray-300"
             >
               {profile.location}
             </motion.p>
@@ -39,7 +40,7 @@ export default function Home() {
               initial={{ opacity: 0, y: 14 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.1, duration: 0.7 }}
-              className="mt-3 text-lg md:text-xl"
+              className="mt-3 text-lg md:text-xl text-gray-900 dark:text-white"
             >
               {profile.designation}
             </motion.p>
@@ -48,7 +49,7 @@ export default function Home() {
               initial={{ opacity: 0, y: 14 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2, duration: 0.7 }}
-              className="mt-4 text-gray-600"
+              className="mt-4 text-gray-600 dark:text-gray-300"
             >
               {profile.tagline}
             </motion.p>
@@ -58,7 +59,8 @@ export default function Home() {
               <a
                 href={profile.resumeHref || "#"}
                 download
-                className="rounded-xl bg-black text-white px-5 py-2.5 text-sm hover:opacity-90"
+                className="rounded-xl bg-black text-white px-5 py-2.5 text-sm hover:opacity-90
+                           dark:bg-white dark:text-black"
               >
                 View / Download Resume
               </a>
@@ -69,7 +71,8 @@ export default function Home() {
                   href={s.href}
                   target="_blank"
                   rel="noreferrer"
-                  className="rounded-xl border bg-white px-4 py-2.5 text-sm hover:bg-gray-50"
+                  className="rounded-xl border bg-white px-4 py-2.5 text-sm hover:bg-gray-50
+                             dark:bg-[#111] dark:text-white dark:border-white/10 dark:hover:bg-[#171717]"
                 >
                   {s.label}
                 </a>
@@ -82,7 +85,8 @@ export default function Home() {
               initial={{ opacity: 0, scale: 0.96 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.7 }}
-              className="rounded-3xl border bg-white p-3 shadow-sm"
+              className="rounded-3xl border bg-white p-3 shadow-sm
+                         dark:bg-[#111] dark:border-white/10"
             >
               <img
                 src={profilePhoto}
@@ -97,15 +101,7 @@ export default function Home() {
       {/* ABOUT */}
       <section id="about" className="mx-auto max-w-6xl px-4 py-12">
         <GsapReveal>
-          <SectionTitle
-            title="About Me"
-            subtitle="My journey, what I enjoy, and a bit of personality."
-          />
-          <div className="rounded-2xl border bg-white p-6 leading-relaxed text-gray-700 space-y-4">
-            {about.paragraphs.map((p, idx) => (
-              <p key={idx}>{p}</p>
-            ))}
-          </div>
+          <About />
         </GsapReveal>
       </section>
 
@@ -126,13 +122,25 @@ export default function Home() {
           <SectionTitle title="Educational Qualification" />
           <div className="grid gap-6">
             {education.map((e) => (
-              <div key={e.title} className="rounded-2xl border bg-white p-6">
+              <div
+                key={e.title}
+                className="rounded-2xl border bg-white p-6
+                           dark:bg-[#111] dark:border-white/10"
+              >
                 <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-2">
-                  <h3 className="font-semibold text-lg">{e.title}</h3>
-                  <p className="text-sm text-gray-600">{e.year}</p>
+                  <h3 className="font-semibold text-lg text-gray-900 dark:text-white">
+                    {e.title}
+                  </h3>
+                  <p className="text-sm text-gray-600 dark:text-gray-300">
+                    {e.year}
+                  </p>
                 </div>
-                <p className="text-sm text-gray-700 mt-1">{e.institute}</p>
-                <ul className="list-disc pl-5 mt-3 text-gray-700 space-y-1">
+
+                <p className="text-sm text-gray-700 dark:text-gray-300 mt-1">
+                  {e.institute}
+                </p>
+
+                <ul className="list-disc pl-5 mt-3 text-gray-700 dark:text-gray-200 space-y-1">
                   {e.details.map((d) => (
                     <li key={d}>{d}</li>
                   ))}
@@ -150,20 +158,36 @@ export default function Home() {
             title="Experience"
             subtitle="Professional experience (optional)."
           />
+
           {experience.length === 0 ? (
-            <div className="rounded-2xl border bg-white p-6 text-gray-700">
+            <div
+              className="rounded-2xl border bg-white p-6 text-gray-700
+                         dark:bg-[#111] dark:border-white/10 dark:text-gray-200"
+            >
               No professional experience added yet.
             </div>
           ) : (
             <div className="grid gap-6">
               {experience.map((x) => (
-                <div key={x.role} className="rounded-2xl border bg-white p-6">
+                <div
+                  key={x.role}
+                  className="rounded-2xl border bg-white p-6
+                             dark:bg-[#111] dark:border-white/10"
+                >
                   <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-2">
-                    <h3 className="font-semibold text-lg">{x.role}</h3>
-                    <p className="text-sm text-gray-600">{x.year}</p>
+                    <h3 className="font-semibold text-lg text-gray-900 dark:text-white">
+                      {x.role}
+                    </h3>
+                    <p className="text-sm text-gray-600 dark:text-gray-300">
+                      {x.year}
+                    </p>
                   </div>
-                  <p className="text-sm text-gray-700 mt-1">{x.company}</p>
-                  <ul className="list-disc pl-5 mt-3 text-gray-700 space-y-1">
+
+                  <p className="text-sm text-gray-700 dark:text-gray-300 mt-1">
+                    {x.company}
+                  </p>
+
+                  <ul className="list-disc pl-5 mt-3 text-gray-700 dark:text-gray-200 space-y-1">
                     {x.points.map((p) => (
                       <li key={p}>{p}</li>
                     ))}
@@ -197,23 +221,34 @@ export default function Home() {
             title="Contact Information"
             subtitle="Reach out directly."
           />
-          <div className="rounded-2xl border bg-white p-6 grid md:grid-cols-3 gap-4 text-sm">
-            <div className="rounded-xl border p-4">
-              <p className="text-gray-600">Email</p>
-              <a className="font-semibold hover:underline" href={`mailto:${profile.email}`}>
+          <div
+            className="rounded-2xl border bg-white p-6 grid md:grid-cols-3 gap-4 text-sm
+                       dark:bg-[#111] dark:border-white/10"
+          >
+            <div className="rounded-xl border p-4 dark:border-white/10">
+              <p className="text-gray-600 dark:text-gray-300">Email</p>
+              <a
+                className="font-semibold hover:underline text-gray-900 dark:text-white"
+                href={`mailto:${profile.email}`}
+              >
                 {profile.email}
               </a>
             </div>
-            <div className="rounded-xl border p-4">
-              <p className="text-gray-600">Phone</p>
-              <a className="font-semibold hover:underline" href={`tel:${profile.phone}`}>
+
+            <div className="rounded-xl border p-4 dark:border-white/10">
+              <p className="text-gray-600 dark:text-gray-300">Phone</p>
+              <a
+                className="font-semibold hover:underline text-gray-900 dark:text-white"
+                href={`tel:${profile.phone}`}
+              >
                 {profile.phone}
               </a>
             </div>
-            <div className="rounded-xl border p-4">
-              <p className="text-gray-600">WhatsApp</p>
+
+            <div className="rounded-xl border p-4 dark:border-white/10">
+              <p className="text-gray-600 dark:text-gray-300">WhatsApp</p>
               <a
-                className="font-semibold hover:underline"
+                className="font-semibold hover:underline text-gray-900 dark:text-white"
                 href={
                   profile.whatsapp
                     ? `https://wa.me/${profile.whatsapp.replace(/[^\d]/g, "")}`

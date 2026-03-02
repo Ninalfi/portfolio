@@ -11,8 +11,9 @@ export const profile = {
   socials: [
     { label: "GitHub", href: "https://github.com/Ninalfi" },
     { label: "LinkedIn", href: "https://www.linkedin.com/in/alfi-sharin-ninad-389230333/?skipRedirect=true" },
-    { label: "Twitter", href: "https://twitter.com/yourusername" },
     { label: "Facebook", href: "https://www.facebook.com/profile.php?id=61588291481817" },
+    { label: "Twitter", href: "https://twitter.com/yourusername" },
+    
   ],
 };
 
@@ -58,7 +59,7 @@ export const skills = [
 export const education = [
   {
     title: "BSc in Computer Science & Engineering",
-    institute: "Jagannth University",
+    institute: "Jagannath University",
     year: "2022 - Present",
     details: [
       "Relevant: DSA, DBMS, OOP, Web Development, Python, JS.",
@@ -85,7 +86,7 @@ export const projects = [
     slug: "bookcourier",
     name: "BookCourier – Book Delivery Platform",
     image:
-      "https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?auto=format&fit=crop&w=1400&q=80",
+      "https://i.ibb.co/mF1vtT8n/Chat-GPT-Image-Mar-2-2026-12-18-59-PM.png",
     stack: ["React", "Tailwind", "Node", "Express", "MongoDB"],
     description:
       "A modern book marketplace/delivery system with dashboard, blog, and book listing.",
@@ -101,6 +102,21 @@ export const projects = [
       "Add real-time notifications.",
       "Improve SEO for blog pages.",
     ],
+  },
+    {
+    slug: "gameHub",
+    name: "GameHub – Game Discovery Platform",
+    image:
+      "https://i.ibb.co/gMGqxpgH/Chat-GPT-Image-Mar-2-2026-01-29-50-PM.png",
+    stack: ["React", "API", "Tailwind"],
+    description: "Game discovery platform with search, clean UI and error handling.",
+    live: "https://awesome-game-hub.web.app/",
+    github: "https://github.com/yourusername/gamehub-client",
+    challenges: [
+      "Handling API rate limits and empty states.",
+      "Making UI responsive across devices.",
+    ],
+    improvements: ["Add hourly/weekly charts.", "Save favorite cities."],
   },
   {
     slug: "shoplite",
@@ -118,19 +134,5 @@ export const projects = [
     ],
     improvements: ["Add backend + payment (Stripe).", "Add admin product panel."],
   },
-  {
-    slug: "weatherwise",
-    name: "WeatherWise – Weather Dashboard",
-    image:
-      "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=1400&q=80",
-    stack: ["React", "API", "Tailwind"],
-    description: "Weather dashboard with search, clean UI and error handling.",
-    live: "https://your-live-link.com/weatherwise",
-    github: "https://github.com/yourusername/weatherwise-client",
-    challenges: [
-      "Handling API rate limits and empty states.",
-      "Making UI responsive across devices.",
-    ],
-    improvements: ["Add hourly/weekly charts.", "Save favorite cities."],
-  },
+
 ];
